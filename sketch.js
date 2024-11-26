@@ -77,8 +77,8 @@ let font;
 
 
 function preload() {
-  song = loadSound("song.mp3");
-  font = loadFont("Maax Mono - Regular-205TF.otf")
+  song = loadSound("./assets/song.mp3");
+  font = loadFont("./assets/Maax Mono - Regular-205TF.otf")
 }
 
 function setup() {
