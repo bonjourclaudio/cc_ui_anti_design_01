@@ -25,7 +25,7 @@ class Thumb {
 
     // Confuse the user by shifting thumb X position
     if (this.isMouseOver() && mouseIsPressed) {
-      this.x = mouseX - random(-30, 30);
+      this.x = mouseX - random(-100, 100);
       this.y = mouseY;
     }
 
