@@ -157,7 +157,7 @@ function draw() {
 
 
   // Swap the sliders every 200 frames
-  if (frameCount % 200 === 0) {
+  if (frameCount % 100 === 0) {
     swap = !swap;
   }
 
