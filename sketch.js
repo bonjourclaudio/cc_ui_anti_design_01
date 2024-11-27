@@ -9,6 +9,18 @@ class Thumb {
 
   display() {
     fill(this.dragging ? "#efefefef" : 255);
+
+    if (this.isMouseOver()) {
+      this.d = this.slider.w + 10;
+    } else {
+      this.d = this.slider.w;
+    }
+
+    if (this.isMouseOver() && mouseIsPressed) {
+      this.x = mouseX - random(-30, 30);
+      this.y = mouseY;
+    }
+
     circle(this.x, this.y, this.d);
   }
 
@@ -50,9 +62,29 @@ class Slider {
   }
 
   display() {
-    fill(0);
-    rect(this.x, this.y, this.w, this.h, this.w, this.w, this.w, this.w);
+
+    let osc = map(sin(frameCount * 0.02), -1, 1, 0, 100);
+
+    push()
+    strokeWeight(this.w)
+    stroke(0)
+
+
+    for (let i = this.y; i < this.y + this.h; i += 1) {
+      let xOffset = map(noise(i / 50, frameCount / 100), 0, 1, -osc, osc);
+      point(this.x + xOffset, i);
+    }
+
+    //line(this.x, this.y, this.x, this.y + this.h);
+    //rect(this.x, this.y, this.w, this.h, this.w, this.w, this.w, this.w);
+
+    pop()
+
+    let thumbXOffset = map(noise(this.thumb.y / 50, frameCount / 100), 0, 1, -osc, osc);
+    this.thumb.x = this.x + thumbXOffset;
+
     this.thumb.display();
+
   }
 
   move() {
@@ -123,7 +155,7 @@ function draw() {
 
   if (volSlider.getVal() === 0 && brightSlider.getVal() === 0) {
     fill(255)
-    text("almost ;)", width / 2, height / 2);
+    text("almost ;)", width / 2 - 65, height / 2);
 
     setTimeout(() => {
       brightSlider.setVal(100);
